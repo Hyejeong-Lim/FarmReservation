@@ -1,22 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+  <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <title>체험농장예약시스템</title>
+  </head>
+  <body>
     <h1 style="text-align: center;">체험농장 예약시스템</h1>
-    <button type="button" class="btn col-md-12 blue1" onclick="location.href='/users/login'">로그아웃</button> <hr>
+    <div style="display: flex; justify-content: flex-end;">
+      <button type="button" class="btn col-md-12 blue1" onclick="location.href='/users/login'">로그아웃</button>
+    </div>
+    <hr>
 
-    <h3 style="padding-left: 30%">예약 불가능 날짜</h3>
+    <form action="/users/reservePost" method="post">
+      <div style="display:flex; justify-content: center">
+        <div>
+          <h3>프로그램명</h3>
+          <input type="text" name="programName" id="programName" required>
 
-    
-    <h3 style="padding-left: 30%">체험 가능한 프로그램명</h3>
+          <h3>예약 불가능 날짜</h3>
+          <input type="date" name="date" id="date" required>
 
-    
-    <h3 style="padding-left: 30%">일일 예약 가능인원</h3>
-        
-</body>
+          <h3>일일 예약 가능인원</h3>
+          <input type="number" name="peopleNumber" id="peopleNumber" min="1" required><br>
+        </div>
+      </div>
+      <div style="display:flex; justify-content: center; margin-top:2%">
+        <div>
+          <button type="submit" class="btn col-md-12 blue1" onclick="location.href='/users/farmInfo'">등록</button>
+          <button type="button" class="btn col-md-12 blue1" onclick="location.href='/users/farmInfo'">취소</button>
+        </div>
+      </div>
+      </form>
+    </form>
+  </body>
 </html>
