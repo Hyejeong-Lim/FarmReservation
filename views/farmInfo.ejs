@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>체험농장예약시스템</title>
+  </head>
+  <body>
+    <h1 style="text-align: center;">체험농장 예약시스템</h1>
+    <div style="display: flex; justify-content: flex-end;">
+      <div>
+        <button type="button" class="btn col-md-12 blue1" onclick="location.href='/users/login'">로그아웃</button>
+        <button type="button" class="btn col-md-12 blue1" onclick="location.href='/users/farmMypage'">농장주마이페이지</button>
+      </div>
+    </div>
+    <hr>
+
+    <h3 style="padding-left: 40%">농장이름</h3>
+
+    <h3 style="padding-left: 40%">상세정보</h3>
+
+    <h3 style="padding-left: 40%">농장주소</h3>
+
+    <h3 style="padding-left: 40%">농장 카테고리</h3>
+
+    <h3 style="padding-left: 40%">지역 카테고리</h3>
+
+    <table style="margin-left: 40%">
+      <thead>
+        <tr>
+          <th>프로그램명</th>
+          <th>가능인원</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for(var i = 0; i < 3; i++) { %>
+          <tr>
+            <th><%=i%></th>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+    <button type='submit' style="margin-left: 58%; margin-top: 1%" onclick="location.href='/users/reserve'">프로그램 추가</button>
+  </body>
+</html>
