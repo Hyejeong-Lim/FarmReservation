@@ -1,22 +1,25 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>체험농장예약시스템</title>
 </head>
+
 <body>
   <h1 style="text-align: center">체험농장 예약시스템</h1>
-    <div style="display: flex; justify-content: flex-end;">
-      <div>
-        <button onclick="location.href='/users/login'">로그인</button>
-        <button onclick="location.href='/users/signup'">회원가입</button>
-        <button onclick="location.href='/users/login'">로그아웃</button>
-        <button onclick="location.href='/users/farmMypage'">농장주마이페이지</button>
-      </div>
+  <div style="display: flex; justify-content: flex-end;">
+    <div>
+      <button onclick="location.href='/users/login'">로그인</button>
+      <button onclick="location.href='/users/signup'">회원가입</button>
+      <button onclick="location.href='/users/login'">로그아웃</button>
+      <button onclick="location.href='/users/farmMypage'">농장주마이페이지</button>
+      <button onclick="location.href='/users/userMypage'">사용자마이페이지</button>
     </div>
-    <hr>
+  </div>
+  <hr>
 
   <div style="margin-left: 40%;">
     <form action="" method="">
@@ -27,7 +30,7 @@
         <option value="grape">포도</option>
         <option value="tangerine">귤</option>
       </select>
-  
+
       <select style="padding-right: 2%;" name="area">
         <option value="" selected> 지역 </option>
         <option value="seoul">서울</option>
@@ -35,25 +38,19 @@
         <option value="gangwon">강원</option>
         <option value="chungcheong">충청</option>
         <option value="busan">부산</option>
-      </select>  
-      <a type="button" onclick="location.href='/'" ><img style="width:2%;" src="..\images\magnifying-glass.png"></a>
+      </select>
+      <a type="button" onclick="location.href='/'"><img style="width:2%;" src="..\images\magnifying-glass.jpg"></a>
       <a type="button" onclick="location.href='/users/farm_reg'"><img style="width:2%;" src="..\images\plus.jpg"></a>
-      
       <button type="button" style="margin-right: 5%;" onclick="location.href='/users/search_list'">검색 리스트</button>
-
     </form>
-
   </div>
 
   <div style="margin-left: 40%; height: 40%;">
-    <!-- <a href="D:\node\FarmReservation\views\Image\strawberry.png";>
-      <img src="Image/strawberry.png"; alt="이미지 없음"; >
-    </a> -->
-    <button type="button"><img src="/Image/strawberry.png"></button>
+    <a type="button" onclick="location.href='/'"><img src="..\images\strawberry.jpg" alt="이미지 없음"></a>
     <p>10월 인기 체험</p>
     <h5>부산 주례동에 위치한 딸기체험 농장이 가장 인기있다.</h5>
-
-</div>
+  </div>
 
 </body>
+
 </html>
