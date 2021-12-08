@@ -21,9 +21,9 @@
   </div>
   <hr>
 
-  <div style="margin-left: 40%;">
-    <form action="" method="">
-      <select style="padding-right: 5%;" name="category">
+  <form action="" method="" >
+    <div style="display: flex; justify-content: center; margin-top: 1%;">
+      <select style="padding-right: 5%; margin-right: 0.5%;" name="category">
         <option value="" selected> 카테고리 </option>
         <option value="apple">사과</option>
         <option value="strawberry">딸기</option>
@@ -31,7 +31,7 @@
         <option value="tangerine">귤</option>
       </select>
 
-      <select style="padding-right: 2%;" name="area">
+      <select style="padding-right: 2%; margin-right: 0.5%;" name="area">
         <option value="" selected> 지역 </option>
         <option value="seoul">서울</option>
         <option value="gyeonggi">경기</option>
@@ -39,18 +39,25 @@
         <option value="chungcheong">충청</option>
         <option value="busan">부산</option>
       </select>
-      <a type="button" onclick="location.href='/'"><img style="width:2%;" src="..\images\magnifying-glass.jpg"></a>
-      <a type="button" onclick="location.href='/users/farm_reg'"><img style="width:2%;" src="..\images\plus.jpg"></a>
-      <button type="button" style="margin-right: 5%;" onclick="location.href='/users/search_list'">검색 리스트</button>
-    </form>
-  </div>
+      <a type="button" onclick="location.href='/'" style="width: 2%;"><img style="width:60%;" src="..\images\magnifying-glass.jpg"></a>
+      <a type="button" onclick="location.href='/users/farm_reg'" style="width: 2%;"><img style="width:60%;" src="..\images\plus.jpg"></a>
+    </div>
+  </form>
 
-  <div style="margin-left: 40%; height: 40%;">
-    <a type="button" onclick="location.href='/'"><img src="..\images\strawberry.jpg" alt="이미지 없음"></a>
-    <p>10월 인기 체험</p>
-    <h5>부산 주례동에 위치한 딸기체험 농장이 가장 인기있다.</h5>
-  </div>
-
+  <a style="display: flex; justify-content: center; margin-top: 1%;" type="button" onclick="location.href='/'"><img src="..\images\strawberry_f.png" alt="이미지 없음"></a>
+  <p style="margin-left: 41%;">10월 인기 체험</p>
+  <p style="margin-left: 41%;">부산 주례동에 위치한 딸기체험 농장이 가장 인기있다.</p>
+  
+  <% for (i=0; i < 3; i ++) { %>
+    <div style="display: flex; justify-content: center;">
+      <img style="margin-bottom: 2%; margin-right: 1%;" width="10%" height="10%" src="..\images\strawberry.jpg" alt="이미지 없음">
+      <div>
+        <a style="font-size:20px; color:rgb(41, 90, 221);text-decoration:underline;" class="" href="/users/progInfo">재민농장</a>
+        <p style="font-size: 18px; line-height: 1.4em; " class="">위치정보 ~</p>
+        <p style="font-size: 18px; line-height: 1.4em; " class="">체험내용 ~</p>
+      </div>
+    </div>
+  <% } %>
 </body>
 
 </html>
