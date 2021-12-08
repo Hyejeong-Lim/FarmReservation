@@ -2,285 +2,73 @@
 <html lang="en">
 
 <head>
-    <title>체험농장 예약시스템</title>
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="mobile-web-app-capable" content="yes">
-    <link href="/static/package/view.min.css?1630042307762" rel="stylesheet" type="text/css">
-    <script async="" src="//www.google-analytics.com/analytics.js"></script>
-    <script src="/static/package/view-resource.min.js?1630042307762"></script>
-    <script>screenWidth = 1200; projectId = "GdXjyOUwGe1l68HZWVI3EBurvfFuoS9m"; sequenceId = "r46ZC";</script>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-        }
-
-        #webView {
-            overflow: hidden;
-            position: relative;
-            background: ;
-            width: 1200px;
-            height: 720px;
-            margin: 0 auto;
-            -webkit-transform: translate3d(0, 0, 0);
-            transform: translate3d(0, 0, 0)
-        }
-
-        #webView[data-show-memo='true'] {
-            overflow: visible
-        }
-    </style>
-    <script type="text/javascript" async="" src="https://m1.daumcdn.net/tiara/js/td.min.js"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>체험농장예약시스템</title>
 </head>
 
-<body data-locale="ko" style="">
-    <div id="webView" data-canvas="true" data-show-memo="false" data-show-link="false"
-        title="페이지에 링크가 연결된 객체가 있을 경우 화면을 터치/클릭하면 표시됩니다.">
-        <div data-obj-id="MOZod" data-obj-type="element" class=""
-            style="position: absolute; top: 101px; left: 2px; width: 1196px; height: 20px;">
-            <div data-image-content="true" style="background-image: url(/static/images/shape/line-horizontal.svg);">
-            </div>
-        </div>
-        <div data-obj-id="v8wC9" data-obj-type="element" data-text-editable="true" class=""
-            style="position: absolute; top: 36px; left: 450px; width: 300px; height: 48px;">
-            <div data-text-content="true" style="font-weight: bold; font-size: 32px; text-align: center;" class="">체험농장
-                예약시스템</div>
-        </div>
-        <div data-obj-id="HVB6D" data-obj-type="element" data-text-editable="true" class=""
-            style="position: absolute; top: 121px; left: 541px; width: 117px; height: 44px;">
-            <div data-text-content="true" style="font-weight: bold; font-size: 28px;" class="">재민농장</div>
-        </div>
-        <div data-obj-type="group" data-obj-id="PYF95" class=""
-            style="position: absolute; left: 423.5px; top: 165px; width: 353px; height: 256px;">
-
-            <div data-obj-type="group" data-obj-id="EkcKE" class=""
-                style="position: absolute; left: 0px; top: 0px; width: 353px; height: 66px; margin-top: 10%;">
-                <div data-obj-id="VRNgd" data-obj-type="element" data-text-editable="true" class=""
-                    style="position: absolute; top: 0px; left: 0px; width: 351.997px; height: 24px;">
-                    <div data-text-content="true" style="font-size: 20px; font-weight: bold;" class=""
-                        spellcheck="false">정보</div>
-                </div>
-                <div data-obj-id="7bwiH" data-obj-type="element" data-text-editable="true" class=""
-                    style="position: absolute; top: 30.4531px; left: 0px; width: 353px; height: 36px;">
-                    <div data-text-content="true" style="font-size: 15px; line-height: 1.4em;" class="">딸기따기 및 잼만들기 체험이
-                        가능하며, 부산 주례동에 위치하고 있습니다.</div>
-                </div>
-            </div>
-        </div>
-
-        <div data-obj-id="BV69z" data-obj-type="element" data-text-editable="true" class=""
-            style="position: absolute; top: 442px; left: 423.5px; width: 65px; height: 25px;">
-            <div data-text-content="true" style="font-weight: bold; font-size: 16px;" class="">프로그램</div>
-        </div>
-
-        <div data-obj-id="pZMcv" data-obj-type="element" data-text-editable="true" class=""
-            style="position: absolute; top: 638px; left: 549.5px; width: 100px; height: 49px;">
-            <button data-text-content="true"
-                style="font-size: 14px; color: rgb(64, 64, 64); text-align: center; line-height: 3.5em; border-radius: 4px; background-color: rgb(224, 224, 224); font-weight: bold;"
-                class="" onclick="location.href='/users/search_list'">취소</button>
-        </div>
-        <div data-obj-id="l9O2M" data-obj-type="element" data-text-editable="true" class=""
-            style="position: absolute; top: 468px; left: 423.5px; width: 300px; height: 20px;">
-            <a data-text-content="true" style="font-size:16px;color:rgb(41, 90, 221);text-decoration:underline;"
-                class="" href="/users/progRes">딸기따기</a>
-        </div>
-        <div data-obj-id="2n8Qt" data-obj-type="element" data-text-editable="true" class=""
-            style="position: absolute; top: 500px; left: 423.5px; width: 300px; height: 20px;">
-            <a data-text-content="true" style="font-size:16px;color:rgb(41, 90, 221);text-decoration:underline;"
-                class="" href="/users/progRes">잼만들기</a>
-        </div>
-        <div data-obj-id="xXR3x" data-obj-type="element" data-text-editable="true" class=""
-            style="position: absolute; top: 533px; left: 423.5px; width: 300px; height: 20px;">
-            <a data-text-content="true" style="font-size:16px;color:rgb(41, 90, 221);text-decoration:underline;"
-                class="" href="/users/progRes">촉감놀이</a>
-        </div>
+<body>
+  <h1 style="text-align: center">체험농장 예약시스템</h1>
+  <div style="display: flex; justify-content: flex-end;">
+    <div>
+      <button onclick="location.href='/users/login'">로그아웃</button>
+      <button onclick="location.href='/users/farmMypage'">농장주마이페이지</button>
+      <button onclick="location.href='/users/userMypage'">사용자마이페이지</button>
     </div>
-    <div id="ovenWebview_Gesture" class="ovenWebview_Gesture">
-        <div id="gesture_left" data-id="GdXjyOUwGe1l68HZWVI3EBurvfFuoS9m/6CwrC" class="gesture_sign gesture_sign_left">
-        </div>
-        <div id="gesture_right" data-id="GdXjyOUwGe1l68HZWVI3EBurvfFuoS9m/rwJN6"
-            class="gesture_sign gesture_sign_right"></div>
-    </div>
-    <div style="display:none;" class="ovenQRnURL"></div>
+  </div>
+  <hr>
 
-    <link rel="stylesheet" type="text/css" href="/static/csslib/elegant-fonts.css">
-    <style>
-        .ovenWebview_Nav {
-            position: fixed;
-            bottom: 15px;
-            left: 15px;
-            width: 120px;
-            height: 40px;
-            color: #fff;
-            -webkit-transform: translate3d(0, 0, 0);
-            transform: translate3d(0, 0, 0);
-        }
+  <div style="display: flex; flex-direction: column; align-items: center;">
+    <p style="font-weight: bold; font-size: 28px;">재민농장</p>
+    <p style="font-size: 20px; font-weight: bold; margin-right: 22%;">정보</p>
+    <p style="font-size: 15px; line-height: 1.4em;">딸기따기 및 잼만들기 체험이 가능하며, 부산 주례동에 위치하고 있습니다.</p>
+    <canvas style="border: 1px solid black" width="500px" height="250px"></canvas>
+  </div>
 
-        .ovenWebview_Nav a {
-            text-decoration: none;
-            color: #fff
-        }
+  <div style="display: flex; flex-direction: column; align-items: center;">
+    <p style="font-weight: bold; font-size: 16px;">프로그램</p>
 
-        .ovenWebview_Nav>a {
-            margin-right: 5px;
-            opacity: 0.7;
-            -webkit-transition: all 0.2s;
-            transition: all 0.2s;
-            ;
-            font-size: 36px;
-        }
-
-        .ovenWebview_Nav>a:not(.disabled):hover {
-            opacity: 1
-        }
-
-        .ovenWebview_Nav>.disabled {
-            opacity: 0.2;
-            cursor: default
-        }
-
-        #toggleMoreMenu {
-            cursor: move
-        }
-
-        .ovenWebview_MoreMenu {
-            position: absolute;
-            width: 170px;
-            margin-left: -10px;
-            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15);
-            border-radius: 4px;
-        }
-
-        .ovenWebview_MoreMenu .arrow {
-            position: absolute;
-            bottom: -10px;
-            width: 0;
-            height: 0;
-            border-left: 10px solid transparent;
-            border-right: 10px solid transparent;
-            border-top: 10px solid #1abc9c;
-        }
-
-        .ovenWebview_MoreMenu .arrow.up {
-            bottom: auto;
-            top: -10px;
-            border-top: none;
-            border-bottom: 10px solid #1abc9c;
-        }
-
-        .ovenWebview_Nav .ovenWebview_MoreMenu a {
-            display: block;
-            height: 40px;
-            line-height: 40px;
-            padding: 0 14px 0 28px;
-            background: #1abc9c;
-            color: #fff;
-        }
-
-        .ovenWebview_MoreMenu a:first-of-type {
-            border-radius: 4px 4px 0 0
-        }
-
-        .ovenWebview_MoreMenu a:last-of-type {
-            border-radius: 0 0 4px 4px
-        }
-
-        .ovenWebview_MoreMenu a:not(.disabled):hover {
-            background: #16a085;
-        }
-
-        .ovenWebview_MoreMenu .sub a.current {
-            font-weight: bold;
-            background: #16a085;
-        }
-
-        .ovenWebview_MoreMenu a.current:after {
-            position: absolute;
-            left: 7px;
-            font-family: "ElegantIcons";
-            content: "N"
-        }
-
-        .ovenWebview_MoreMenu a.has_sub.on {
-            background: #16a085;
-        }
-
-        .ovenWebview_MoreMenu a.has_sub:after {
-            position: absolute;
-            right: 10px;
-            font-family: "ElegantIcons";
-            content: "E"
-        }
-
-        .ovenWebview_MoreMenu .sub {
-            display: none;
-            overflow: auto;
-            position: absolute;
-            left: 97%;
-            height: 165px;
-            margin-top: -70px;
-            width: 130px;
-            box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.35);
-            border-radius: 4px;
-            background: #1abc9c
-        }
-
-        .ovenWebview_MoreMenu .sub.alt {
-            left: auto;
-            right: 97%;
-        }
-
-        .ovenWebview_MoreMenu .sub>a {
-            overflow: hidden;
-            font-size: 12px;
-            height: 30px;
-            line-height: 30px;
-            padding: 0 10px 0 25px;
-            text-overflow: ellipsis;
-            white-space: nowrap
-        }
-
-        .ovenWebview_MoreMenu a.disabled {
-            color: rgba(255, 255, 255, 0.3);
-            cursor: default;
-        }
-
-        .ovenQRnURL {
-            position: absolute;
-            z-index: 1000;
-            top: 50%;
-            left: 50%;
-            width: 320px;
-            margin: -240px 0 0 -170px;
-            padding: 10px;
-            background-color: rgba(0, 0, 0, 0.6);
-            border-radius: 20px;
-        }
-
-        .ovenQRnURL>img {
-            background-color: #fff;
-            margin: 20px;
-        }
-
-        .ovenQRnURL>strong {
-            display: block;
-            font-size: 24px;
-            font-family: Monospace;
-            text-align: center;
-            color: #fff;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 1);
-            word-break: break-all;
-        }
-    </style>
-    <style>
-        .ovenWebview_Nav a {
-            color: #1abc9c
-        }
-    </style>
-    </div>
-    <script>(function (i, s, o, g, r, a, m) { i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () { (i[r].q = i[r].q || []).push(arguments) }, i[r].l = 1 * new Date(); a = s.createElement(o), m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m) })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga'); ga('create', 'UA-54845033-1', 'auto'); ga('send', 'pageview');
-    </script>
-    <script>var _tiq = 'undefined' !== typeof _tiq ? _tiq : []; _tiq.push(['__setPageName', 'webview']); _tiq.push(['__trackPageview']); (function (d) { var se = d.createElement('script'); se.type = 'text/javascript'; se.async = true; se.src = location.protocol + '//m1.daumcdn.net/tiara/js/td.min.js'; var s = d.getElementsByTagName('head')[0]; s.appendChild(se); })(document);</script>
+    <table class="table">
+      <thead>
+        <tr class="th">
+          <th></th>
+          <th>프로그램</th>
+          <th>가능인원</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for(i=0; i < 5; i++) { %>
+          <tr class="td" onClick="location.href='/users/progRes'">
+            <td>
+              <%=i%>
+            </td>
+            <td>딸기따기</td>
+            <td>10</td>
+          </tr>
+          <% } %>
+      </tbody>
+    </table>
+    <button style="margin-top: 1%; height: 40px; width: 100px;" onclick="location.href='/'">취소</button>
+  </div>
 </body>
 
 </html>
+<style>
+  table {
+    border-top: 1px solid #444444;
+    border-collapse: collapse;
+  }
+
+  th,
+  td {
+    border-bottom: 1px solid #444444;
+    border-left: 1px solid #444444;
+    padding: 10px;
+  }
+
+  th:first-child,
+  td:first-child {
+    border-left: none;
+  }
+</style>
