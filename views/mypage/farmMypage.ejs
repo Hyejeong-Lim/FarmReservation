@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>체험농장예약시스템</title>
+</head>
+
+<body>
+  <h1 style="text-align: center;">체험농장 예약시스템</h1>
+  <div style="display: flex; justify-content: flex-end;">
+    <div>
+      <button type="button" class="btn col-md-12 blue1" onclick="location.href='/users/login'">로그아웃</button>
+      <button type="button" class="btn col-md-12 blue1" onclick="location.href='/'">메인</button>
+    </div>
+  </div>
+  <hr>
+  <div style="display: flex; justify-content: flex-end;">
+    <button type="button" class="btn col-md-12 blue1" onclick="location.href='/users/farmInfo'">농장정보</button>
+  </div>
+  <div>
+    <p class="info" style="left: 20%;">농장주정보</p>
+    <p class="info" style="left: 60%;">예약관리</p>
+  </div>
+  <hr style="width: 80%; margin-top: 4%;">
+
+  <div>
+    <div class="text" style="left: 23%;">
+      <p>아이디</p>
+      <p>비밀번호</p>
+      <p>이름</p>
+      <p>전화번호</p>
+      <p>이메일</p>
+    </div>
+    <div class="text" style="left: 31%;">
+      <p>farm1</p>
+      <p>u*****</p>
+      <p>최OO</p>
+      <p>010-1234-5678</p>
+      <p>bye@gmail.com</p>
+    </div>
+    <button class="button" style="left: 27%;" onclick="location.href='/users/farmMypage_update'">수정</button>
+  </div>
+  <div>
+    <div class="text" style="left: 60%;">
+      <table class="table">
+        <thead>
+          <tr class="th">
+            <th></th>
+            <th>프로그램</th>
+            <th>예약날짜</th>
+            <th>시간</th>
+            <th>예약자명</th>
+            <th>인원</th>
+            <th>결제금액</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for(i = 0; i < 5; i++) { %>
+          <tr class="td">
+            <td><%=i%></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</body>
+
+</html>
+<style>
+  .info {
+    position: absolute;
+    top: 16%;
+    width: 370px;
+    height: 40px;
+    text-align: center;
+    line-height: 2.5em;
+    background-color: rgb(224, 224, 224);
+  }
+  .text {
+    position: absolute;
+    top: 27%;
+  }
+  .button {
+    position: absolute;
+    top: 55%;
+    width: 100px;
+    height: 49px;
+  }
+  table {
+    width: 100%;
+    border-top: 1px solid #444444;
+    border-collapse: collapse;
+  }
+  th, td {
+    border-bottom: 1px solid #444444;
+    border-left: 1px solid #444444;
+    padding: 10px;
+  }
+  th:first-child, td:first-child {
+    border-left: none;
+  }
+</style>
