@@ -49,4 +49,8 @@ router.get('/progInfo', function(req, res, next) {
 router.get('/progRes', function(req, res, next) {
   res.render('ProgRes', { title: 'Express' });
 });
+
+router.get('/payment', function(req, res, next) {
+  res.render('payment', { title: 'Express' });
+});
 module.exports = router;
