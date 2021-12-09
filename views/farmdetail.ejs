@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>체험농장예약시스템</title>
+</head>
+
+<body>
+  <h1 style="text-align: center">체험농장 예약시스템</h1>
+  <div style="display: flex; justify-content: flex-end;">
+    <div>
+      <% if(is_logined==false) { %>
+        <button onclick="location.href='/login'">로그인</button>
+        <button onclick="location.href='/register'">회원가입</button>
+      <% } else { %>
+      <% if (FarmYN==1) { %>
+        <p>농장주</p>
+      <% } else { %>
+        <p>사용자</p>
+      <% } %>
+      <button onclick="location.href='/mypage'">마이페이지</button>
+      <button onclick="location.href='/logout'">로그아웃</button>
+      <% } %>
+    </div>
+  </div>
+  <button onclick="location.href='../'">메인페이지</button>
+  <hr>
+  <% if(list.length==0) { %>
+    <h2>프로그램이 없습니다</h2>
+  <% } else { %>
+    <form action="programjoin" method="post">
+      <h2>
+        <%= list[0].FarmName%>
+      </h2>
+      농장정보:<%= list[0].FarmInfo%><br>
+      주소:<%= list[0].FarmAddress%><br>
+      <img src="<%=list[0].PicturePath%>" width="300Px" height="200px">
+      <br>
+      <% for (i=0 ; i < list.length; i++){ %>
+      <p>
+        <%=i+1%>번 프로그램 이름: <%= list[i].PrgName%><br>
+        프로그램 시작일 : <%= ((list[i].PrgStartDATE)+"").substring(0,15)%><br>
+        프로그램 종료일 : <%= ((list[i].PrgEndDATE)+"").substring(0,15)%><br>
+        프로그램 인당 가격: <%= list[i].PrgPrice%><br>
+        프로그램 시작시간:<%= list[i].PrgStart%><br>
+        프로그램 종료시간:<%= list[i].PrgEnd%><br>
+        프로그램 수용가능인원: <%= list[i].PrgMax%><br>
+        프로그램 현재신청한인원:<%= list[i].PrgSub%><br>
+      </p>
+      <%}%>
+      <select name="program">
+        <% for (i=0 ; i < list.length; i++){ %>
+          <option value="<%= list[i].PrgNum%>">
+            <%= list[i].PrgName%>
+          </option>
+        <%}%>
+      </select>
+      <input type="hidden" name="PostNum" value="<%= list[0].PostNum%>">
+      <input type="date" name="selectedDate"><br>
+      <input type="number" name="Person" style="width: 30px;">명
+      <button type="submit">예약하기</button>
+    </form>
+  <% } %>
+</body>
+
+</html>

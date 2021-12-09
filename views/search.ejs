@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>체험농장예약시스템</title>
+</head>
+
+<body>
+  <h1 style="text-align: center">체험농장 예약시스템</h1>
+  <div style="display: flex; justify-content: flex-end;">
+    <div>
+      <% if(is_logined==false) { %>
+        <button onclick="location.href='/login'">로그인</button>
+        <button onclick="location.href='/register'">회원가입</button>
+      <% } else { %>
+      <% if (FarmYN==1) { %>
+        <p>농장주</p>
+      <% } else { %>
+        <p>사용자</p>
+      <% } %>
+      <button onclick="location.href='/mypage'">마이페이지</button>
+      <button onclick="location.href='/logout'">로그아웃</button>
+      <% } %>
+    </div>
+  </div>
+  <button onclick="location.href='../'">메인페이지</button>
+  <hr>
+  <h2 style="text-align: center">게시글 리스트</h2>
+  <div style="display: flex; justify-content: center; margin-top: 1%;">
+    <form action="/search" method="post" style="width: 13%;">
+      <input type="hidden" name="FarmYN" value="<%= FarmYN %>">
+      <select style="padding-right: 5%; margin-right: 0.5%;" name="category">
+        <% for(i=0; i < FarmCategoryName.length; i++) { %>
+          <option value="<%=i%>">
+            <%= FarmCategoryName[i].FarmCategoryName%>
+          </option>
+          <% } %>
+      </select>
+      <select style="padding-right: 2%; margin-right: 0.5%;" name="local">
+        <% for(i=0; i < LocalName.length; i++) { %>
+          <option value="<%=i%>">
+            <%= LocalName[i].LocalName%>
+          </option>
+          <% } %>
+      </select>
+      <button type="submit">검색</button>
+      <!-- <img src="..\images\magnifying-glass.jpg"> -->
+    </form>
+  </div>
+
+  <table class="table">
+    <colgroup>
+      <col width='150'>
+      <col width='50'>
+      <col width='100'>
+      <col width='100'>
+      <col width='100'>
+      <col width='100'>
+      <col width='100'>
+      <col width='50'>
+    </colgroup>
+    <thead>
+      <tr class="th">
+        <th>사진</th>
+        <th>게시글번호</th>
+        <th>카테고리</th>
+        <th>지역</th>
+        <th>농장이름</th>
+        <th>설명</th>
+        <th>주소</th>
+        <th>상세보기</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (list.length==0){%>
+        <tr>
+          <td colspan="8" style="text-align: center;">검색결과가 없습니다.</td>
+        </tr>
+      <%}else{%>
+        <% for(i=0; i < list.length; i++) { %>
+          <tr class="td" style="text-align: center;">
+            <td><img src="<%=list[i].PicturePath%>" width="100Px" height="60px"></td>
+            <td><%=list[i].PostNum %></td>
+            <td><%=list[i].FarmCategoryName %></td>
+            <td><%=list[i].LocalName%></td>
+            <td><%=list[i].FarmName %></td>
+            <td><%=list[i].FarmInfo %></td>
+            <td><%=list[i].FarmAddress %></td>
+            <td>
+            <form action="/farmdetail" method="post">
+              <input type="hidden" name="PostNum" value="<%=list[i].PostNum %>">
+              <input type="hidden" name="FarmName" value="<%=list[i].FarmName %>">
+              <input type="hidden" name="FarmInfo" value="<%=list[i].FarmInfo %>">
+              <input type="hidden" name="FarmAddress" value="<%=list[i].FarmAddress %>">
+              <button type="submit">상세보기</button>
+            </form>
+            </td>
+          </tr>
+          <% } %>
+        <%}%>
+    </tbody>
+  </table boader='1'>
+</body>
+
+</html>
+
+<style>
+table {
+  width: 100%;
+  border-top: 1px solid #444444;
+  border-collapse: collapse;
+}
+th, td {
+  border-bottom: 1px solid #444444;
+  border-left: 1px solid #444444;
+  padding: 10px;
+}
+th:first-child, td:first-child {
+  border-left: none;
+}
+</style>

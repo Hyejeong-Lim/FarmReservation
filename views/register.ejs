@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>체험농장 예약시스템</title>
+</head>
+
+<body>
+  <h1 style="text-align: center">체험농장 예약시스템</h1>
+  <div style="display: flex; justify-content: flex-end;">
+    <div>
+        <button onclick="location.href='/login'">로그인</button>
+        <button onclick="location.href='/'">메인</button>
+    </div>
+  </div>
+  <hr>
+  <h3 style="text-align: center;">회원가입</h3>
+  <form method="post" action="/register">
+    <div class="container col-md-5" style="margin-left: 30%;">
+      <h5 style="float:left; margin-right: 5%; width: 90px;">아이디 </h5>
+      <input type="text" name="ID" required class="form-control" style="width:30%; margin-bottom: 5%" /> <br>
+      <h5 style="float:left; margin-right: 5%; width: 90px;">비밀번호 </h5>
+      <input type="password" name="PW" required class="form-control" style="width:30%; margin-bottom: 5%" /> <br>
+      <h5 style="float:left; margin-right: 5%; width: 90px;">이름 </h5>
+      <input type="text" name="MemberName" required class="form-control" style="width:30%; margin-bottom: 5%" /> <br>
+      <h5 style="float:left; margin-right: 5%; width: 90px;">전화번호 </h5>
+      <input type="text" name="MemberPhoneNum" required class="form-control" style="width:30%; margin-bottom: 5%;" placeholder="***-****-****" /> <br>
+      <h5 style="float:left; margin-right: 5%; width: 90px;">이메일 </h5>
+      <input type="text" name="MemberEmail" required class="form-control" style="width:30%; margin-bottom: 5%" /> <br>
+      <div style="width:40%; float: left; margin-bottom: 2%; vertical-align: middle;">
+        <label style="margin-left: 50%;">Farm</label>
+        <input type="checkbox" name="FarmYN" value="1">
+      </div>
+    </div>
+    <input type="submit" value="완료" style=" width: 5%; margin-left: 45%;" onclick="location.href='/users/login'">
+  </form>
+  </section>
+</body>
+
+</html>

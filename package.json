@@ -1,16 +1,21 @@
 {
-  "name": "farmreservation",
-  "version": "0.0.0",
-  "private": true,
+  "name": "farm",
+  "version": "0.0.1",
+  "description": "",
+  "main": "app.js",
   "scripts": {
     "start": "nodemon ./bin/www"
   },
+
   "dependencies": {
-    "cookie-parser": "~1.4.4",
-    "debug": "~2.6.9",
+    "async": "^3.2.2",
+    "cookie-parser": "^1.4.6",
     "ejs": "^3.1.6",
-    "express": "~4.16.1",
-    "http-errors": "~1.6.3",
-    "morgan": "~1.9.1"
+    "express": "^4.17.1",
+    "express-session": "^1.17.2",
+    "moment": "^2.29.1",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.15",
+    "session-file-store": "^1.5.0"
   }
 }

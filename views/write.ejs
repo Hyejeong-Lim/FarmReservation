@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>체험농장예약시스템</title>
+</head>
+
+<body>
+  <h1 style="text-align: center">체험농장 예약시스템</h1>
+  <div style="display: flex; justify-content: flex-end;">
+    <div>
+      <% if(is_logined==false) { %>
+        <button onclick="location.href='/login'">로그인</button>
+        <button onclick="location.href='/register'">회원가입</button>
+      <% } else { %>
+      <% if (FarmYN==1) { %>
+        <p>농장주</p>
+      <% } else { %>
+        <p>사용자</p>
+      <% } %>
+      <button onclick="location.href='/mypage'">마이페이지</button>
+      <button onclick="location.href='/logout'">로그아웃</button>
+      <% } %>
+    </div>
+  </div>
+  <button onclick="location.href='../'">메인페이지</button>
+  <hr>
+  <h2>농장 게시글 작성</h2>
+  <form action='/programWrite' method='post'>
+    농장이름 : <input type='text' name='FarmName' style="width:300px;font-size:30px;"><br>
+    농장정보 : <input type='text' name='FarmInfo' style="width:300px;height:200px;font-size:10px;"><br>
+    농장주소 : <input type='text' name='FarmAddress' style="width:300px;"><br>
+    농장사진 : <input type='file' name='PicturePath' style="width:300px;"><br>
+    농장 카테고리 선택:
+    <select name="category" required>
+      <option value="" selected>선택</option>
+      <% for(i=0; i < FarmCategoryName.length; i++) { %>
+        <option value="<%=i%>">
+          <%= FarmCategoryName[i].FarmCategoryName%>
+        </option>
+        <% } %>
+    </select><br>
+    지역 카테고리 선택:
+    <select name="local" required>
+      <option value="" selected>선택</option>
+      <% for(i=0; i < LocalName.length; i++) { %>
+        <option value="<%=i%>">
+          <%= LocalName[i].LocalName%>
+        </option>
+        <% } %>
+    </select>
+    <button type='submit'>등록</button>
+  </form>
+</body>
+
+</html>

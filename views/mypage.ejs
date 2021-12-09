@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>체험농장예약시스템</title>
+</head>
+
+<body>
+  <h1 style="text-align: center">체험농장 예약시스템</h1>
+  <div style="display: flex; justify-content: flex-end;">
+    <div>
+      <% if(is_logined==false) { %>
+        <button onclick="location.href='/login'">로그인</button>
+        <button onclick="location.href='/register'">회원가입</button>
+      <% } else { %>
+      <% if (FarmYN==1) { %>
+        <p>농장주</p>
+      <% } else { %>
+        <p>사용자</p>
+      <% } %>
+      <button onclick="location.href='/mypage'">마이페이지</button>
+      <button onclick="location.href='/logout'">로그아웃</button>
+      <% } %>
+    </div>
+  </div>
+  <div>
+    <button onclick="location.href='../'">메인페이지</button>
+    <% if (list[0].FarmYN==1){%>
+      <button type="button" class="btn col-md-12 blue1" onclick="location.href='/users/farmInfo'">농장정보</button>
+    <% } %>
+  </div>
+  <hr>
+  <div>
+    <p class="info" style="left: 20%;"><%=list[0].MemberName %>님의 정보</p>
+    <p class="info" style="left: 60%;">예약관리</p>
+  </div>
+  <!-- <hr style="width: 80%; margin-top: 1%;"> -->
+  <form action='/Infochange' method="post">
+    <div>
+      <div class="text" style="left: 23%;">
+        <p>아이디</p>
+        <p>비밀번호</p>
+        <p>이름</p>
+        <p>전화번호</p>
+        <p>이메일</p>
+      </div>
+      <div class="text" style="left: 31%;">
+        <p><%=list[0].ID %></p>
+        <p><input type='text' name="PW" value="<%=list[0].PW %>"></p>
+        <p><input type='text' name="MemberName" value="<%=list[0].MemberName %>"></p>
+        <p><input type='text' name="MemberPhoneNum" value="<%=list[0].MemberPhoneNum %>"></p>
+        <p><input type='text' name="MemberEmail" value="<%=list[0].MemberEmail %>"></p>
+        <button type="submit">정보 수정</button>
+      </div>
+    </div>
+  </form>
+  <% if (list[0].FarmYN==1){%>
+    <div>
+      <div class="text" style="left: 57%;">
+        <table class="table">
+          <thead>
+            <tr class="th">
+              <th>번호</th>
+              <th>프로그램</th>
+              <th>예약자ID</th>
+              <th>예약날짜</th>
+              <th>인원</th>
+              <th>인원</th>
+              <th>결제금액</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for(i=0; i < list1.length ; i++){%>
+              <tr class="td">
+                <td><%=list1[i].PostNum%></td>
+                <td><%=list1[i].PrgName%></td>
+                <td><%=list1[i].RsvID%></td>
+                <td><%=((list1[i].Date)+"").substring(0,15)%></td>
+                <td><%=list1[i].Person%></td>
+                <td><%=list1[i].PriceSum%></td>
+              </tr>
+            <%}%>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  <%}else{%>
+    <div>
+      <div class="text" style="left: 53%;">
+        <table class="table">
+          <thead>
+            <tr class="th">
+              <th>프로그램 이름</th>
+              <th>인원</th>
+              <th>프로그램 시작시간</th>
+              <th>프로그램 종료시간</th>
+              <th>프로그램 날짜</th>
+              <th>결제금액</th>
+              <th>취소</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for(i=0; i < list1.length ; i++){%>
+              <tr class="td">
+                <td><%=list1[i].PrgName%></td>
+                <td><%=list1[i].Person%></td>
+                <td><%=list1[i].PrgStart%></td>
+                <td><%=list1[i].PrgEnd%></td>
+                <td><%=((list1[i].Date)+"").substring(0,15)%></td>
+                <td><%=list1[i].PriceSum%></td>
+                <td>
+                  <form action="delete" method="post">
+                    <%=i+1%>번<input type="hidden" name="RsvNum" value="<%=list1[i].RsvNum%>">
+                      <input type="hidden" name="RsvID" value="<%=list1[i].RsvID%>">
+                      <input type="hidden" name="PrgNum" value="<%=list1[i].PrgNum%>">
+                      <input type="hidden" name="PostNum" value="<%=list1[i].PostNum%>">
+                      <input type="hidden" name="Person" value="<%=list1[i].Person%>">
+                      <button>예약취소</button>
+                  </form>
+                </td>
+              </tr>
+            <%}%>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  <%}%>
+</body>
+
+</html>
+<style>
+  .info {
+    position: absolute;
+    top: 20%;
+    width: 370px;
+    height: 40px;
+    text-align: center;
+    line-height: 2.5em;
+    background-color: rgb(224, 224, 224);
+  }
+  .text {
+    position: absolute;
+    top: 27%;
+  }
+  .button {
+    position: absolute;
+    top: 55%;
+    width: 100px;
+    height: 49px;
+  }
+  table {
+    width: 100%;
+    border-top: 1px solid #444444;
+    border-collapse: collapse;
+  }
+  th, td {
+    border-bottom: 1px solid #444444;
+    border-left: 1px solid #444444;
+    padding: 10px;
+  }
+  th:first-child, td:first-child {
+    border-left: none;
+  }
+</style>
