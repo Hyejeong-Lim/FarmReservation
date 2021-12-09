@@ -16,10 +16,10 @@
         <button onclick="location.href='/login'">로그인</button>
         <button onclick="location.href='/register'">회원가입</button>
       <% } else { %>
-      <% if (FarmYN==1) { %>
-        <p>농장주</p>
-      <% } else { %>
-        <p>사용자</p>
+        <% if (FarmYN==1) { %>
+          <p>농장주 <%=name %>님</p>
+        <% } else { %>
+          <p>사용자 <%=name %>님</p>
       <% } %>
       <button onclick="location.href='/mypage'">마이페이지</button>
       <button onclick="location.href='/logout'">로그아웃</button>
