@@ -7,6 +7,7 @@ const session = require('express-session');
 const moment = require('moment');
 const FileStore = require('session-file-store')(session); // 세션을 파일에 저장
 const { concatSeries, select } = require('async');
+const { list } = require('session-file-store/lib/session-file-helpers');
 
 // express 설정 1
 const app = express();
@@ -14,7 +15,7 @@ const app = express();
 // db 연결 2
 const client = mysql.createConnection({
   user: 'root',
-  password: 'gPwjd1025',
+  password: 'qkqh14!@#$',
   database: 'farm'
 });
 
@@ -325,15 +326,69 @@ app.post('/programregist', function (req, res) {
       [
         body.PostNum, body.PrgName, body.PrgPrice, body.PrgStart, body.PrgEnd, body.PrgMax, body.PrgStartDate, body.PrgEndDate
       ]);
-
+      client.query('select * from farmpost inner join program on farmpost.PostNum=program.PostNum where ID=?', [data[0].login_number], (err, data1) => {
+        console.log('data1',data1);
+        client.query('select * from farmpost where ID=?',[body.ID],(err,data2)=>{
     if (body.button == "작성완료") {
       res.redirect('/');
     } else {
-      res.render('programWrite.ejs', {
-        PostNum: body.PostNum
+      res.render('farmInfo.ejs', {
+        is_logined:req.session.is_logined,
+        FarmYN: data[0].FarmYN,
+        PostNum: body.PostNum,
+        list:data1,
+        list1:data2
       });
     }
+  });
+});
+  });
+});
 
+app.post('/deletePrg', function (req, res) {
+  var body = req.body;
+  console.log(body);
+  client.query('select * from login_session', (err, data) => {
+    client.query('delete from program where PrgNum=?',[body.PrgNum]);
+    client.query('select * from farmpost inner join program on farmpost.PostNum=program.PostNum where ID=?', [data[0].login_number], (err, data1) => {
+      console.log('data1',data1);
+      client.query('select * from farmpost where ID=?',[data[0].login_number],(err,data2)=>{
+
+      
+      if (body.button == "작성완료") {
+       res.redirect('/');
+      } else {
+       res.render('farmInfo.ejs', {
+         is_logined:req.session.is_logined,
+         FarmYN: data[0].FarmYN,
+         PostNum: body.PostNum,
+         list:data1,
+         list1:data2[0]
+       });
+      }
+    });
+    });
+  });
+});
+
+app.post('/changePrg', function (req, res) {//수정버튼이지만 아직 삭제버튼과 같은기능.
+  var body = req.body;
+  console.log(body);
+  client.query('select * from login_session', (err, data) => {
+    client.query('delete from program where PrgNum=?',[body.PrgNum]);
+    client.query('select * from farmpost inner join program on farmpost.PostNum=program.PostNum where ID=?', [data[0].login_number], (err, data1) => {
+      console.log('data1',data1);
+      if (body.button == "작성완료") {
+       res.redirect('/');
+      } else {
+       res.render('farmInfo.ejs', {
+         is_logined:req.session.is_logined,
+         FarmYN: data[0].FarmYN,
+         PostNum: body.PostNum,
+         list:data1
+       });
+      }
+    });
   });
 });
 
@@ -375,7 +430,7 @@ app.get('/mypage', (req, res) => {
         else {
             console.log(rows[0].login_number);
             client.query('select * from member where ID=?',[rows[0].login_number],(err,data1)=>{
-                console.log("data1",data1);
+                console.log("data1",data1);//회원정보
                 console.log('data1[0].ID',data1[0].ID);
                 console.log('data1[0].YN',data1[0].FarmYN);
                 if (data1[0].FarmYN==1){
@@ -385,8 +440,8 @@ app.get('/mypage', (req, res) => {
                           console.log("data2213123",data2);
                           res.render('mypage.ejs', 
                           {   
-                              list : data1,
-                              list1 : data2,
+                              list : data1,//회원정보
+                              list1 : data2,//예약신청받은 프로그램 리스트
                               is_logined: req.session.is_logined,
                               name: session[0].login_name,
                               FarmYN: session[0].login_farm_YN,
@@ -413,7 +468,7 @@ app.get('/mypage', (req, res) => {
                           res.render('mypage.ejs', 
                           {   
                               list : data1,
-                              list1 : data2,
+                              list1 : data2,//회원이 신청한 예약 리스트
                               is_logined: req.session.is_logined,
                               name: null,
                               FarmYN: null
@@ -447,6 +502,7 @@ app.post('/Infochange', (req, res)=>{
                   console.log(data2);
                   res.render('mypage.ejs',
                   {   
+                      is_logined : req.session.is_logined,
                       list : data1,
                       list1 : data2
                   });
@@ -483,6 +539,40 @@ app.post('/farmdetail', (req, res) => {
         FarmYN: null,
       });
     }
+  });
+});
+
+app.post('/farmInfo', (req, res) => {
+  var body = req.body;
+  console.log('농장주 관리페이지');
+  console.log('body',body);
+  client.query('select * from farmpost inner join program on farmpost.PostNum=program.PostNum where ID=?', [body.ID], (err, data1) => {
+    console.log("data1",data1);
+    client.query('select * from farmpost where ID=?',[body.ID],(err,data2)=>{
+      console.log('data2[0]',data2[0]);
+    if (req.session.is_logined == true) {
+      client.query('select * from login_session', (err, session) => {
+          res.render('farminfo.ejs',
+          {
+            list: data1,//게시글 및 프로그램 정보
+            is_logined: req.session.is_logined,
+            name: session[0].login_name,
+            FarmYN: session[0].login_farm_YN,
+            list1:data2[0]//프로그램이 없는 게시판 정보
+          });
+          
+        
+      });
+    } else {
+      res.render('farminfo.ejs',
+      {
+        list: data1,
+        is_logined: req.session.is_logined,
+        name: null,
+        FarmYN: null,
+      });
+    }
+  });
   });
 });
 
