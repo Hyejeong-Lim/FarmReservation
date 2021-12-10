@@ -17,16 +17,17 @@
         <button onclick="location.href='/register'">회원가입</button>
       <% } else { %>
         <% if (FarmYN==1) { %>
-          <p>농장주 <%=name %>님</p>
+          <p> ● 농장주 <%=name %>님</p>
         <% } else { %>
-          <p>사용자 <%=name %>님</p>
+          <p> ● 사용자 <%=name %>님</p>
       <% } %>
       <button onclick="location.href='/mypage'">마이페이지</button>
       <button onclick="location.href='/logout'">로그아웃</button>
       <% } %>
     </div>
   </div>
-  <hr>
+  <hr> 
+
   <div style="display: flex; justify-content: center; margin-top: 1%;">
     <form action="/search" method="post" style="width: 13%;">
       <input type="hidden" name="FarmYN" value="<%= FarmYN %>">
@@ -45,19 +46,21 @@
           <% } %>
       </select>
       <button type="submit">검색</button>
+    </form>
       <!-- <img src="..\images\magnifying-glass.jpg"> -->
-    </form>
-    <% if (FarmYN==1) { %>
-    <form action="/write" method="post">
-      <input type="hidden" name="FarmYN" value="<%= FarmYN %>">
-      <button type="submit">등록</button>
-      <!-- <img src="..\images\plus.jpg"> -->
-    </form>
+      <% if (FarmYN==1) { %>
+        <form action="/write" method="post">
+          <input type="hidden" name="FarmYN" value="<%= FarmYN %>">
+          <button type="submit">등록</button>
+          <!-- <img src="..\images\plus.jpg"> -->
+        </form>
     <% } %>
   </div>
+  <br>
   <a style="display: flex; justify-content: center; margin-top: 1%;" type="button" onclick="location.href='/'"><img src="..\images\strawberry_f.png" alt="이미지 없음"></a>
-  <p style="margin-left: 41%;">10월 인기 체험</p>
-  <p style="margin-left: 41%;">부산 주례동에 위치한 딸기체험 농장이 가장 인기있다.</p>
+  <br>
+  <b style="margin-left: 41%; font-size: 20px;">10월 인기 체험</b>
+  <p style="margin-left: 41%; font-size: 16px;">부산 주례동에 위치한 딸기체험 농장이 가장 인기있다.</p>
   <!-- <% for (i=0; i < 3; i ++) { %>
     <div style="display: flex; justify-content: center;">
       <img style="margin-bottom: 2%; margin-right: 1%;" width="10%" height="10%" src="..\images\strawberry.jpg" alt="이미지 없음">

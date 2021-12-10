@@ -9,8 +9,8 @@
 </head>
 
 <body>
-  <h1 style="text-align: center">체험농장 예약시스템</h1>
   <div style="display: flex; justify-content: flex-end;">
+    <h1 style="margin-left: 43%; margin-right: auto;">체험농장 예약시스템</h1>
     <div>
       <% if(is_logined==false) { %>
         <button onclick="location.href='/login'">로그인</button>
@@ -25,34 +25,36 @@
       <button onclick="location.href='/logout'">로그아웃</button>
       <% } %>
     </div>
-  </div>
-  <div>
-    <button onclick="location.href='../'">메인페이지</button>
-    
-    <% if (list[0].FarmYN==1){%>
-      <form action="farmInfo" method="post">
-        <input type="hidden" name="ID" value="<%=list[0].ID%>">
-      <button type="submit" class="btn col-md-12 blue1" onclick="location.href='/farmInfo'">농장정보</button>
-    </form>
-    <% } %>
-
+    <div>
+      <button onclick="location.href='../'">메인페이지</button>
+      
+      <% if (list[0].FarmYN==1){%>
+        <form action="farmInfo" method="post">
+          <input type="hidden" name="ID" value="<%=list[0].ID%>">
+        <button type="submit" class="btn col-md-12 blue1" onclick="location.href='/farmInfo'">농장정보</button>
+      </form>
+      <% } %>
+  
+    </div>
   </div>
   <hr>
+
   <div>
     <p class="info" style="left: 20%;"><%=list[0].MemberName %>님의 정보</p>
     <p class="info" style="left: 60%;">예약관리</p>
   </div>
+
   <!-- <hr style="width: 80%; margin-top: 1%;"> -->
   <form action='/Infochange' method="post">
     <div>
-      <div class="text" style="left: 23%;">
+      <div class="text" style="left: 22%;">
         <p>아이디</p>
         <p>비밀번호</p>
         <p>이름</p>
         <p>전화번호</p>
         <p>이메일</p>
       </div>
-      <div class="text" style="left: 31%;">
+      <div class="text" style="left: 28%;">
         <p> <%=list[0].ID %></p>
         <input type='hidden' name="ID" value="<%=list[0].ID %>">
         <p><input type='text' name="PW" value="<%=list[0].PW %>"></p>
@@ -73,7 +75,7 @@
               <th>프로그램</th>
               <th>예약자ID</th>
               <th>예약날짜</th>
-              <th>인원</th>
+              <th>예약시간</th>
               <th>인원</th>
               <th>결제금액</th>
             </tr>

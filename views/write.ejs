@@ -9,8 +9,8 @@
 </head>
 
 <body>
-  <h1 style="text-align: center">체험농장 예약시스템</h1>
   <div style="display: flex; justify-content: flex-end;">
+    <h1 style="margin-left: 43%; margin-right: auto;">체험농장 예약시스템</h1>
     <div>
       <% if(is_logined==false) { %>
         <button onclick="location.href='/login'">로그인</button>
@@ -32,20 +32,20 @@
   <h2 style="text-align: center;">농장 게시글 작성</h2>
 
   <form action='/programWrite' method='post'>
-    <h3 style="padding-left: 40%">농장이름</h3>
-    <input type='text' name='FarmName' style="padding-right: 10%;  margin-left: 40%; margin-right: 40%; text-align: left;" size="30" placeholder="내용을 입력해주세요."><br>
+    <h3 style="padding-left: 40%">■ 농장이름</h3>
+    <input type='text' name='FarmName' style="padding-right: 5%;  padding-left: 5%; margin-left: 40%; margin-right: 40%; margin-bottom: 1%; text-align: center;" size="30" placeholder="내용을 입력해주세요."><br>
     
-    <h3 style="padding-left: 40%">정보입력</h3>
-    <input type='text' name='FarmInfo' style="padding: 5%; margin-left: 40%; margin-right: 40%;" size="30" placeholder="내용을 입력해주세요."><br>
+    <h3 style="padding-left: 40%">■ 정보입력</h3>
+    <input type='text' name='FarmInfo' style="padding: 5%; margin-left: 40%; margin-right: 40%; margin-bottom: 1%; text-align: center;" size="30" placeholder="내용을 입력해주세요."><br>
     
-    <h3 style="padding-left: 40%">농장주소</h3>
-    <input type='text' name='FarmAddress' style="width:300px; margin-left: 40%; margin-right: 40%;"><br>
+    <h3 style="padding-left: 40%">■ 농장주소</h3>
+    <input type='text' name='FarmAddress' style="width:300px; margin-left: 40%; margin-right: 40%; margin-bottom: 1%;"><br>
     
-    <h3 style="padding-left: 40%">농장사진</h3>
-    <input type='file' name='PicturePath' style="width:300px;"><br>
+    <h3 style="padding-left: 40%">■ 농장사진</h3>
+    <input type='file' name='PicturePath' style="width:300px; margin-left: 40%; margin-right: 40%; margin-bottom: 1%;"><br>
 
-    <h3 style="padding-left: 40%">농장 카테고리 선택</h3>
-    <select name="category" required style="padding-right: 5%; margin-left: 40%; margin-right: 40%;">
+    <h3 style="padding-left: 40%">■ 농장 카테고리 선택</h3>
+    <select name="category" required style="padding-right: 5%; margin-left: 40%; margin-right: 40%; margin-bottom: 1%;">
       <option value="" selected>선택</option>
       <% for(i=0; i < FarmCategoryName.length; i++) { %>
         <option value="<%=i%>">
@@ -54,7 +54,7 @@
         <% } %>
     </select><br>
    
-    <h3 style="padding-left: 40%">지역 카테고리 선택</h3>
+    <h3 style="padding-left: 40%">■ 지역 카테고리 선택</h3>
     <select name="local" required style="padding-right: 5%; margin-left: 40%; margin-right: 40%;">
       <option value="" selected>선택</option>
       <% for(i=0; i < LocalName.length; i++) { %>
@@ -64,7 +64,7 @@
         <% } %>
     </select>
     <div style="display: flex; justify-content: center; margin-top: 2%;">
-      <button type='submit' onclick="location.href='/farmInfo'">등록</button>
+      <button type='submit' style="width: 5%;" onclick="location.href='/farmInfo'">등록</button>
     </div>
   </form>
 </body>
