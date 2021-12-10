@@ -17,7 +17,7 @@ const app = express();
 // db 연결 2
 const client = mysql.createConnection({
   user: 'root',
-  password: 'qkqh14!@#$',
+  password: '',
   database: 'farm'
 });
 
@@ -389,24 +389,30 @@ app.post('/Infochange', (req, res) => {
 
 app.post('/farmdetail', (req, res) => {
   var body = req.body;
-  client.query('select * from farmpost inner join program on farmpost.PostNum=program.PostNum where farmpost.PostNum=?', [body.PostNum], (err, data1) => {
-    if (req.session.is_logined == true) {
-      client.query('select * from login_session', (err, session) => {
-        res.render('farmdetail.ejs',
-          {
-            list: data1,
-            is_logined: req.session.is_logined,
-            name: session[0].login_name,
-            FarmYN: session[0].login_farm_YN,
+  client.query('select * from farmpost where PostNum=?', [body.PostNum], (err, data) => {
+    if(data.length != 0) {
+      client.query('select * from program where PostNum=?', [body.PostNum], (err, data1) => {
+        if (req.session.is_logined == true) {
+          client.query('select * from login_session', (err, session) => {
+            res.render('farmdetail.ejs',
+              {
+                farm: data,
+                prog: data1,
+                is_logined: req.session.is_logined,
+                name: session[0].login_name,
+                FarmYN: session[0].login_farm_YN
+              });
           });
-      });
-    } else {
-      res.render('farmdetail.ejs',
-      {
-        list: data1,
-        is_logined: req.session.is_logined,
-        name: null,
-        FarmYN: null,
+        } else {
+          res.render('farmdetail.ejs',
+          {
+            farm: data,
+            prog: data1,
+            is_logined: req.session.is_logined,
+            name: null,
+            FarmYN: null
+          });
+        }
       });
     }
   });
