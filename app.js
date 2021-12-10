@@ -8,6 +8,8 @@ const moment = require('moment');
 const FileStore = require('session-file-store')(session); // 세션을 파일에 저장
 const { concatSeries, select } = require('async');
 const { list } = require('session-file-store/lib/session-file-helpers');
+const { route } = require('express/lib/application');
+javascriptkey = '8e4c599cb73586b521359d6f3dbdb55b';
 
 // express 설정 1
 const app = express();
@@ -58,7 +60,8 @@ app.get('/', (req, res) => {
           is_logined: false,
           FarmYN: false,
           FarmCategoryName: data1,
-          LocalName: data2
+          LocalName: data2,
+          javascriptkey: process.env.javascriptkey
         });
       }
     });
