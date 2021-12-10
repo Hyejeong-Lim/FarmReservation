@@ -28,9 +28,14 @@
   </div>
   <div>
     <button onclick="location.href='../'">메인페이지</button>
+    
     <% if (list[0].FarmYN==1){%>
-      <button type="button" class="btn col-md-12 blue1" onclick="location.href='/users/farmInfo'">농장정보</button>
+      <form action="farmInfo" method="post">
+        <input type="hidden" name="ID" value="<%=list[0].ID%>">
+      <button type="submit" class="btn col-md-12 blue1" onclick="location.href='/farmInfo'">농장정보</button>
+    </form>
     <% } %>
+
   </div>
   <hr>
   <div>
@@ -48,7 +53,8 @@
         <p>이메일</p>
       </div>
       <div class="text" style="left: 31%;">
-        <p><%=list[0].ID %></p>
+        <p> <%=list[0].ID %></p>
+        <input type='hidden' name="ID" value="<%=list[0].ID %>">
         <p><input type='text' name="PW" value="<%=list[0].PW %>"></p>
         <p><input type='text' name="MemberName" value="<%=list[0].MemberName %>"></p>
         <p><input type='text' name="MemberPhoneNum" value="<%=list[0].MemberPhoneNum %>"></p>
