@@ -44,7 +44,6 @@ app.get('/', (req, res) => {
       if (req.session.is_logined == true) {
         client.query('select * from login_session', (err, session) => {
           client.query('select * from farmpost', (err, data) => {
-            console.log(data.length)
             res.render('index', {
               list: data,
               is_logined: req.session.is_logined,
