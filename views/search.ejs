@@ -34,20 +34,19 @@
       <input type="hidden" name="FarmYN" value="<%= FarmYN %>">
       <select style="padding-right: 5%; margin-right: 0.5%;" name="category">
         <% for(i=0; i < FarmCategoryName.length; i++) { %>
-          <option value="<%=i%>">
+          <option value="<%=FarmCategoryName[i].FarmCategoryName%>">
             <%= FarmCategoryName[i].FarmCategoryName%>
           </option>
           <% } %>
       </select>
       <select style="padding-right: 2%; margin-right: 0.5%;" name="local">
         <% for(i=0; i < LocalName.length; i++) { %>
-          <option value="<%=i%>">
+          <option value="<%=LocalName[i].LocalName%>">
             <%= LocalName[i].LocalName%>
           </option>
           <% } %>
       </select>
       <button type="submit">검색</button>
-      <!-- <img src="..\images\magnifying-glass.jpg"> -->
     </form>
   </div>
 
