@@ -31,7 +31,7 @@
       <% if (list[0].FarmYN==1){%>
         <form action="farmInfo" method="post">
           <input type="hidden" name="ID" value="<%=list[0].ID%>">
-        <button type="submit" class="btn col-md-12 blue1" onclick="location.href='/farmInfo'">농장정보</button>
+        <button type="submit" class="btn col-md-12 blue1">농장정보</button>
       </form>
       <% } %>
   
@@ -58,7 +58,7 @@
         <p> <%=list[0].ID %></p>
         <input type='hidden' name="ID" value="<%=list[0].ID %>">
         <p><input type='text' name="PW" value="<%=list[0].PW %>"></p>
-        <p><input type='text' name="MemberName" value="<%=list[0].MemberName %>"></p>
+        <p><%=list[0].MemberName %></p>
         <p><input type='text' name="MemberPhoneNum" value="<%=list[0].MemberPhoneNum %>"></p>
         <p><input type='text' name="MemberEmail" value="<%=list[0].MemberEmail %>"></p>
         <button type="submit">정보 수정</button>
