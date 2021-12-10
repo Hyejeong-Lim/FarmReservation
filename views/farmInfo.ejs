@@ -28,81 +28,106 @@
   </div>
   <button onclick="location.href='../'">메인페이지</button>
   <hr>
-  
-  <% if(list.length==0) { %>
-    <h2>프로그램이 없습니다</h2>
-    <form action='/programregist' method='post'>
-      <input type="hidden" name="PostNum" value="<%= list1.PostNum %>">
-      프로그램 시작 날짜 : <input type="date" name="PrgStartDate" value="<%= list1.PrgStartDate%>"><br>
-      프로그램 종료 날짜 : <input type="date" name="PrgEndDate" value="<%= list1.PrgEndDate%>"><br><br>
-      프로그램 이름 및 내용<br> <input type='text' name='PrgName' value="<%= list1.PrgName%>" style="width:300px;height:200px;font-size:10px;"><br>
-      프로그램 가격 : <input type='number' name='PrgPrice' value="<%= list1.PrgPrice%>" style="width:100px;">원<br>
-      프로그램 최대인원 : <input type='number' name='PrgMax' value="<%= list1.PrgMax%>" style="width:50px;">명<br>
-      프로그램 시작시간 : <input type='time' name='PrgStart' value="<%= list1.PrgStart%>" style="width:300px;"><br>
-      프로그램 종료시간 : <input type='time' name='PrgEnd'value="<%= list1.PrgEnd%>"  style="width:300px;"><br>
-      <input type="hidden" name="ID" value="<%=list1.ID%>">
-      <input type='submit' name="button" value="작성완료">
-      <input type='submit' name="button" value="추가작성">
-    </form>
-  <% } else { %>
-    <table border='0'>
-    <colgroup>
-
-    </colgroup>
-    
-            <tr>
-                <td>
-                    <h2>
-                    <%= list[0].FarmName%>
-                        </h2>
-                    농장정보:<%= list[0].FarmInfo%><br>
-                    주소:<%= list[0].FarmAddress%><br>
-                    <img src="<%=list[0].PicturePath%>" width="300Px" height="200px">
-                    <br>
-                    <% for (i=0 ; i < list.length; i++){ %>
-                    <p>
-                        <%=i+1%>번 프로그램 이름: <%= list[i].PrgName%><br>
-                        프로그램 시작일 : <%= ((list[i].PrgStartDATE)+"").substring(0,15)%><br>
-                        프로그램 종료일 : <%= ((list[i].PrgEndDATE)+"").substring(0,15)%><br>
-                        프로그램 인당 가격: <%= list[i].PrgPrice%><br>
-                        프로그램 시작시간:<%= list[i].PrgStart%><br>
-                        프로그램 종료시간:<%= list[i].PrgEnd%><br>
-                        프로그램 수용가능인원: <%= list[i].PrgMax%><br>
-                        프로그램 현재신청한인원:<%= list[i].PrgSub%><br>
-                    <form action="deletePrg" method="post">
-                        <input type="hidden" name="PrgNum" value="<%= list[i].PrgNum%>">
-                        <button type="submit">삭제</button>
-                    </form>
-                    <form action="changePrg" method="post">
-                        <input type="hidden" name="PrgNum" value="<%= list[i].PrgNum%>">
-                        <button type="submit">수정</button>
-                    </form>
-                    </p>
-                    <%}%>
-                    <input type="hidden" name="PostNum" value="<%= list[0].PostNum%>">
-                    
-                </td>
-                <td>
-                    <form action='/programregist' method='post'>
-                        <input type="hidden" name="PostNum" value="<%= list[0].PostNum %>">
-                        프로그램 시작 날짜 : <input type="date" name="PrgStartDate"><br>
-                        프로그램 종료 날짜 : <input type="date" name="PrgEndDate"><br><br>
-                        프로그램 이름 및 내용<br> <input type='text' name='PrgName' style="width:300px;height:200px;font-size:10px;"><br>
-                        프로그램 가격 : <input type='number' name='PrgPrice' style="width:100px;">원<br>
-                        프로그램 최대인원 : <input type='number' name='PrgMax' style="width:50px;">명<br>
-                        프로그램 시작시간 : <input type='time' name='PrgStart' style="width:300px;"><br>
-                        프로그램 종료시간 : <input type='time' name='PrgEnd' style="width:300px;"><br>
-                        <input type="hidden" name="ID" value="<%=list[0].ID%>">
-                        <input type='submit' name="button" value="작성완료">
-                        <input type='submit' name="button" value="추가작성">
-                      </form>
-                </td>
+  <div class="text" style="left: 57%;">
+    <table class="table">
+      <thead>
+        <tr class="th">
+          <th>농장이름</th>
+          <th>상세정보</th>
+          <th>사진</th>
+          <th>농장주소</th>
+          <th>농장 카테고리</th>
+          <th>지역 카테고리</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if(farmpost.length != 0) { %>
+          <% for(i=0; i < farmpost.length ; i++){%>
+            <tr class="td">
+              <td><%=farmpost[0].FarmName%></td>
+              <td><%=farmpost[0].FarmInfo%></td>
+              <td><%=farmpost[0].PicturePath%></td>
+              <td><%=farmpost[0].FarmAddress%></td>
+              <td><%=farmpost[0].CategoryName%></td>
+              <td><%=farmpost[0].LocalName%></td>
             </tr>
-        
+          <%}%>
+        <% } else { %>
+          <tr class="td">
+            <td colspan="6" style="text-align: center;">등록된 농장이 없습니다.</td>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+  <h2 style="text-align: center;">프로그램</h2>
+  <% if(program.length != 0) { %>
+  <table class="table">
+    <thead>
+      <tr class="td">
+        <th></th>
+        <th>프로그램이름</th>
+        <th>시작날짜</th>
+        <th>종료날짜</th>
+        <th>가격</th>
+        <th>가능인원</th>
+        <th>시작시간</th>
+        <th>종료시간</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for(var i = 0; i < program.length; i++) { %>
+        <tr class="td">
+          <th><input type="checkbox" name="check" value="<%=program[i].PrgNum%>"></th>
+          <th><%=program[i].PrgName%></th>
+          <th><%=program[i].PrgStartDATE%></th>
+          <th><%=program[i].PrgEndDATE%></th>
+          <th><%=program[i].PrgPrice%></th>
+          <th><%=program[i].PrgMax%></th>
+          <th><%=program[i].PrgStart%></th>
+          <th><%=program[i].PrgEnd%></th>
+        </tr>
     </tbody>
-</table boader='1'>
-<% } %>
-    
+    <% } %>
+  </table>
+  <div style="display: flex; justify-content: flex-end;">
+    <form action="deletePrg" method="post">
+        <input type="hidden" name="PrgNum" value="<%=program[0].PrgNum%>">
+      <button type="submit">프로그램 삭제</button>
+    </form>
+    <form action="programregist" method="get">
+      <input type="hidden" name="PostNum" value="<%=farmpost[0].PostNum%>">
+      <button type="submit">프로그램 추가</button>
+    </form>
+  </div>
+  <% } else { %>
+    <tr class="td">
+      <td colspan="6" style="text-align: center;">등록된 프로그램이 없습니다.</td>
+    </tr>
+    <form action="programregist" method="get" style="display: flex; justify-content: flex-end;">
+      <input type="hidden" name="PostNum" value="<%=farmpost[0].PostNum%>">
+      <button type="submit">프로그램 추가</button>
+    </form>
+  <% } %>
 </body>
 
 </html>
+<style>
+  text {
+    position: absolute;
+    top: 27%;
+  }
+  table {
+    width: 100%;
+    border-top: 1px solid #444444;
+    border-collapse: collapse;
+  }
+  th, td {
+    border-bottom: 1px solid #444444;
+    border-left: 1px solid #444444;
+    padding: 10px;
+  }
+  th:first-child, td:first-child {
+    border-left: none;
+  }
+</style>
