@@ -20,91 +20,126 @@
           <p>농장주 <%=name %>님</p>
         <% } else { %>
           <p>사용자 <%=name %>님</p>
+        <% } %>
+        <button onclick="location.href='/mypage'">마이페이지</button>
+        <button onclick="location.href='/logout'">로그아웃</button>
       <% } %>
-      <button onclick="location.href='/mypage'">마이페이지</button>
-      <button onclick="location.href='/logout'">로그아웃</button>
-      <% } %>
+      <button onclick="location.href='../'" >메인페이지</button>
     </div>
   </div>
-  <button onclick="location.href='../'">메인페이지</button>
   <hr>
-  <% if(list.length==0) { %>
-    <h2>프로그램이 없습니다</h2>
-  <% } else { %>
+
+  <div style="display: flex; justify-content: center; margin-top: 1%;">
     <form action="programjoin" method="post">
-      <h2>
-        <%= list[0].FarmName%>
-      </h2>
-      농장정보:<%= list[0].FarmInfo%><br>
-      주소:<%= list[0].FarmAddress%><br>
+      <h2><%= farm[0].FarmName%></h2>
+      농장정보:<%= farm[0].FarmInfo%><br>
+      주소:<%= farm[0].FarmAddress%><br>
+      <img src="<%=farm[0].PicturePath%>" width="300Px" height="200px"><br>
       <div id="map" style="width:50%;height:300px;"></div>
 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8e4c599cb73586b521359d6f3dbdb55b&libraries=services"></script>
-<script>
-var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-    mapOption = {
-        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨
-    };  
+      <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8e4c599cb73586b521359d6f3dbdb55b&libraries=services"></script>
+      <script>
+        var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+          mapOption = {
+            center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+            level: 3 // 지도의 확대 레벨
+          };
 
-// 지도를 생성합니다    
-var map = new kakao.maps.Map(mapContainer, mapOption); 
+        // 지도를 생성합니다    
+        var map = new kakao.maps.Map(mapContainer, mapOption);
 
-// 주소-좌표 변환 객체를 생성합니다
-var geocoder = new kakao.maps.services.Geocoder();
+        // 주소-좌표 변환 객체를 생성합니다
+        var geocoder = new kakao.maps.services.Geocoder();
 
-// 주소로 좌표를 검색합니다
-geocoder.addressSearch('부산광역시 사상구 가야대로330번길', function(result, status) {
+        // 주소로 좌표를 검색합니다
+        geocoder.addressSearch('<%=farm[0].FarmAddress%>', function(result, status) {
 
-    // 정상적으로 검색이 완료됐으면 
-     if (status === kakao.maps.services.Status.OK) {
+          // 정상적으로 검색이 완료됐으면 
+          if (status === kakao.maps.services.Status.OK) {
 
-        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 
-        // 결과값으로 받은 위치를 마커로 표시합니다
-        var marker = new kakao.maps.Marker({
-            map: map,
-            position: coords
-        });
+            // 결과값으로 받은 위치를 마커로 표시합니다
+            var marker = new kakao.maps.Marker({
+              map: map,
+              position: coords
+            });
 
-        // 인포윈도우로 장소에 대한 설명을 표시합니다
-        var infowindow = new kakao.maps.InfoWindow({
-            content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
-        });
-        infowindow.open(map, marker);
+            // 인포윈도우로 장소에 대한 설명을 표시합니다
+            var infowindow = new kakao.maps.InfoWindow({
+              content: '<div style="width:150px;text-align:center;padding:6px 0;"><%=farm[0].FarmAddress%></div>'
+            });
+            infowindow.open(map, marker);
 
-        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-        map.setCenter(coords);
-    } 
-});    
-</script>
-      <img src="<%=list[0].PicturePath%>" width="300Px" height="200px">
-      <br>
-      <% for (i=0 ; i < list.length; i++){ %>
-      <p>
-        <%=i+1%>번 프로그램 이름: <%= list[i].PrgName%><br>
-        프로그램 시작일 : <%= ((list[i].PrgStartDATE)+"").substring(0,15)%><br>
-        프로그램 종료일 : <%= ((list[i].PrgEndDATE)+"").substring(0,15)%><br>
-        프로그램 인당 가격: <%= list[i].PrgPrice%><br>
-        프로그램 시작시간:<%= list[i].PrgStart%><br>
-        프로그램 종료시간:<%= list[i].PrgEnd%><br>
-        프로그램 수용가능인원: <%= list[i].PrgMax%><br>
-        프로그램 현재신청한인원:<%= list[i].PrgSub%><br>
-      </p>
-      <%}%>
-      <select name="program">
-        <% for (i=0 ; i < list.length; i++){ %>
-          <option value="<%= list[i].PrgNum%>">
-            <%= list[i].PrgName%>
-          </option>
-        <%}%>
-      </select>
-      <input type="hidden" name="PostNum" value="<%= list[0].PostNum%>">
-      <input type="date" name="selectedDate"><br>
-      <input type="number" name="Person" style="width: 30px;">명
-      <button type="submit">예약하기</button>
+            // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+            map.setCenter(coords);
+          }
+        });    
+      </script>
+      <table class="table">
+        <thead>
+          <tr class="th">
+            <th>프로그램명</th>
+            <th>시작일</th>
+            <th>종료일</th>
+            <th>인당 가격</th>
+            <th>시작시간</th>
+            <th>종료시간</th>
+            <th>수용가능인원</th>
+            <th>현재신청한인원</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if(prog.length != 0) { %>
+            <% for (i=0 ; i < prog.length; i++) { %>
+              <tr class="td" style="text-align: center;">
+                <td><%= prog[i].PrgName%></td>
+                <td><%= ((prog[i].PrgStartDATE)+"").substring(0,15)%></td>
+                <td><%= ((prog[i].PrgEndDATE)+"").substring(0,15)%></td>
+                <td><%= prog[i].PrgPrice%></td>
+                <td><%= prog[i].PrgStart%></td>
+                <td><%= prog[i].PrgEnd%></td>
+                <td><%= prog[i].PrgMax%></td>
+                <td><%= prog[i].PrgSub%></td>
+              </tr>
+            <% } %>
+          <% }else { %>
+            <tr class="td">
+              <td colspan="8" style="text-align: center;">등록된 프로그램이 없습니다.</td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+      <% if(prog.length != 0) { %>
+        <select name="program">
+          <% for (i=0 ; i < prog.length; i++){ %>
+            <option value="<%= prog[i].PrgNum%>">
+              <%= prog[i].PrgName%>
+            </option>
+            <%}%>
+        </select>
+        <input type="hidden" name="PostNum" value="<%= prog[0].PostNum%>">
+        <input type="date" name="selectedDate"><br>
+        <input type="number" name="Person" style="width: 30px;">명
+        <button type="submit">예약하기</button>
+      <% } %>
     </form>
-  <% } %>
+  </div>
 </body>
 
 </html>
+<style>
+  table {
+    width: 100%;
+    border-top: 1px solid #444444;
+    border-collapse: collapse;
+  }
+  th, td {
+    border-bottom: 1px solid #444444;
+    border-left: 1px solid #444444;
+    padding: 10px;
+  }
+  th:first-child, td:first-child {
+    border-left: none;
+  }
+</style>
