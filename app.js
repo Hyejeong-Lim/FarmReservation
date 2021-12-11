@@ -286,12 +286,11 @@ app.post('/programjoin', function (req, res) {
   var body = req.body;
   client.query('select * from program where PrgNum=?', [body.program], (err, data1) => {
     client.query('select * from login_session', (err, data) => {
-      console.log((parseInt(body.Person) + parseInt(data1[0].PrgSub)));
       if ((parseInt(body.Person) + parseInt(data1[0].PrgSub)) <= data1[0].PrgMax) {
         if ((moment(body.selectedDate, "YYYY-MM-DD")).isBefore(moment(data1[0].PrgEndDATE, "YYYY-MM-DD")) && (moment(body.selectedDate, "YYYY-MM-DD")).isSameOrAfter(moment(data1[0].PrgStartDATE, "YYYY-MM-DD"))) {
-          client.query('insert into programjoinlist(RsvID,PrgNum,PostNum,Date,Person,PriceSum) values(?,?,?,?,?,?)',
+          client.query('insert into programjoinlist(RsvID,PrgNum,PostNum,Date,Time,Person,PriceSum,CardName,CardNum,CardPw) values(?,?,?,?,?,?,?,?,?,?)',
             [
-              data[0].login_number, body.program, body.PostNum, body.selectedDate, body.Person, parseInt(data1[0].PrgPrice) * body.Person
+              data[0].login_number, body.program, body.PostNum, body.selectedDate, body.selectedTime, body.Person, parseInt(data1[0].PrgPrice) * body.Person, body.CardName, body.CardNum, body.CardPw
             ]);
           client.query('update program set PrgSub=? where PrgNum=?',
             [(parseInt(body.Person) + parseInt(data1[0].PrgSub)), body.program]
