@@ -31,7 +31,7 @@
 
   <h2 style="text-align: center;">농장 게시글 작성</h2>
 
-  <form action='/farmInfo' method='post'>
+  <form action='/farmInfo' method='post' enctype="multipart/form-data">
     <h3 style="padding-left: 40%">■ 농장이름</h3>
     <input type='text' name='FarmName' style="padding-right: 5%;  padding-left: 5%; margin-left: 40%; margin-right: 40%; margin-bottom: 1%; text-align: center;" size="30" placeholder="내용을 입력해주세요."><br>
     
@@ -42,7 +42,7 @@
     <input type='text' name='FarmAddress' style="width:300px; margin-left: 40%; margin-right: 40%; margin-bottom: 1%;"><br>
     
     <h3 style="padding-left: 40%">■ 농장사진</h3>
-    <input type='file' name='PicturePath' style="width:300px; margin-left: 40%; margin-right: 40%; margin-bottom: 1%;"><br>
+    <input type='file' class="form-control-file" id="fileupload" name='fileupload' style="width:300px; margin-left: 40%; margin-right: 40%; margin-bottom: 1%;"><br>
 
     <h3 style="padding-left: 40%">■ 농장 카테고리 선택</h3>
     <select name="category" required style="padding-right: 5%; margin-left: 40%; margin-right: 40%; margin-bottom: 1%;">

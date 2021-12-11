@@ -38,6 +38,31 @@ app.use(session({
   store: new FileStore() // 세션이 데이터를 저장하는 곳
 }));
 
+// 파일저장
+var multer = require('multer')
+
+//파일 저장위치와 파일이름 설정
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    //파일이 이미지 파일이면
+    if (file.mimetype == "image/jpeg" || file.mimetype == "image/jpg" || file.mimetype == "image/png") {
+      console.log("이미지 파일이네요")
+      cb(null, 'public/images')
+    //텍스트 파일이면
+    } else if (file.mimetype == "application/pdf" || file.mimetype == "application/txt" || file.mimetype == "application/octet-stream") {
+      console.log("텍스트 파일이네요")
+      cb(null, 'public/texts')
+    }
+  },
+  //파일이름 설정
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + "-" + file.originalname)
+  }
+
+})
+//파일 업로드 모듈
+var upload = multer({ storage: storage })
+
 app.get('/', (req, res) => {
   client.query('select LocalName from localcode', (err, data2) => {
     client.query('select FarmCategoryName from farmcategorycode', (err, data1) => {
@@ -417,12 +442,12 @@ app.post('/farmdetail', (req, res) => {
   });
 });
 
-app.post('/farmInfo', (req, res) => {         
+app.post('/farmInfo', upload.single('fileupload'), (req, res) => {         
   var body = req.body;
   console.log(body)
   if(body.FarmName != undefined) {
-    client.query('insert into farmpost(CategoryName,LocalName,ID,FarmName,FarmInfo,FarmAddress,PostDate,PicturePath) values(?,?,?,?,?,?,CURDATE(),?)',
-          [body.category, body.local, body.ID, body.FarmName, body.FarmInfo, body.FarmAddress, body.PicturePath]);
+    client.query('insert into farmpost(CategoryName,LocalName,ID,FarmName,FarmInfo,FarmAddress,PostDate,fileupload) values(?,?,?,?,?,?,CURDATE(),?)',
+          [body.category, body.local, body.ID, body.FarmName, body.FarmInfo, body.FarmAddress, req.file.originalname]);
   }
   client.query('select * from farmpost where ID=?', [body.ID], (err, data) => {
     if (data.length != 0) {
