@@ -92,7 +92,8 @@
   </table>
   <div style="display: flex; justify-content: flex-end;">
     <form action="deletePrg" method="post">
-        <input type="hidden" name="PrgNum" value="<%=program[0].PrgNum%>">
+        <input type="hidden" name="PrgNum" value="<%=program[0].PrgNum%>"> 
+        <input type="hidden" name="ID" value="<%=ID%>">
       <button type="submit">프로그램 삭제</button>
     </form>
     <form action="programregist" method="get">

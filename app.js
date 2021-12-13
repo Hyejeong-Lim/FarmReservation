@@ -17,8 +17,8 @@ const app = express();
 // db 연결 2
 const client = mysql.createConnection({
   user: 'root',
-  password: '',
-  database: 'farm'
+  password: 'qkqh14!@#$',
+  database: 'farm1'
 });
 
 // 정적 파일 설정 (미들웨어) 3
@@ -180,11 +180,13 @@ app.get('/logout', (req, res) => {
 
 app.post('/search', (req, res) => {
   var body = req.body;
+  console.log('body',body);
   client.query('select LocalName from localcode', (err, data2) => {
     client.query('select FarmCategoryName from farmcategorycode', (err, data1) => {
       if (req.session.is_logined == true) {
         client.query('select * from login_session', (err, session) => {
-          if (body.category == 0) {
+          if (body.category == 'x') {
+            console.log('body.category = x ');
             client.query('select * from farmpost inner join localcode on farmpost.LocalName=localcode.LocalName inner join farmcategorycode on farmpost.CategoryName=farmcategorycode.FarmCategoryName where farmpost.LocalName=?', [body.local], (err, data) => {
               if (err) console.log('query is not excuted. select fail...\n' + err);
               else {
@@ -199,7 +201,8 @@ app.post('/search', (req, res) => {
                 });
               }
             });
-          } else if (body.local == 0) {
+          } else if (body.local == 'x') {
+            console.log('body.local = x ');
             client.query('select * from farmpost inner join localcode on farmpost.LocalName=localcode.LocalName inner join farmcategorycode on farmpost.CategoryName=farmcategorycode.FarmCategoryName where farmpost.CategoryName=?', [body.category], (err, data) => {
               if (err) console.log('query is not excuted. select fail...\n' + err);
               else res.render('search.ejs', {
@@ -214,6 +217,7 @@ app.post('/search', (req, res) => {
             });
           } else {
             client.query('select * from farmpost inner join localcode on farmpost.LocalName=localcode.LocalName inner join farmcategorycode on farmpost.CategoryName=farmcategorycode.FarmCategoryName where farmpost.LocalName=? and farmpost.CategoryName=?', [body.local, body.category], (err, data) => {
+              console.log('data',data);
               if (err) console.log('query is not excuted. select fail...\n' + err);
               else res.render('search.ejs', {
                 list: data,
@@ -228,7 +232,7 @@ app.post('/search', (req, res) => {
           }
         });
       } else {
-        if (body.category == 0) {
+        if (body.category == 'x') {
           client.query('select * from farmpost inner join localcode on farmpost.LocalName=localcode.LocalName inner join farmcategorycode on farmpost.CategoryName=farmcategorycode.FarmCategoryName where farmpost.LocalName=?', [body.local], (err, data) => {
             if (err) console.log('query is not excuted. select fail...\n' + err);
             else {
@@ -237,13 +241,13 @@ app.post('/search', (req, res) => {
                 FarmYN: body.FarmYN,
                 FarmCategoryName: data1,
                 LocalName: data2,
-                is_logined: req.session.is_logined,
+                is_logined: false,
                 name: null,
                 FarmYN: null,
               });
             }
           });
-        } else if (body.local == 0) {
+        } else if (body.local == 'x') {
           client.query('select * from farmpost inner join localcode on farmpost.LocalName=localcode.LocalName inner join farmcategorycode on farmpost.CategoryName=farmcategorycode.FarmCategoryName where farmpost.CategoryName=?', [body.category], (err, data) => {
             if (err) console.log('query is not excuted. select fail...\n' + err);
             else res.render('search.ejs', {
@@ -251,20 +255,21 @@ app.post('/search', (req, res) => {
               FarmYN: body.FarmYN,
               FarmCategoryName: data1,
               LocalName: data2,
-              is_logined: req.session.is_logined,
+              is_logined: false,
               name: null,
               FarmYN: null,
             });
           });
         } else {
-          client.query('select * from farmpost inner join localcode on farmpost.LocalName=localcode.LocalName inner join farmcategorycode on farmpost.CategoryName=farmcategorycode.FarmCategoryName where farmpost.LocalName=? and farmpost.CategoryName', [body.local, body.category], (err, data) => {
+          client.query('select * from farmpost inner join localcode on farmpost.LocalName=localcode.LocalName inner join farmcategorycode on farmpost.CategoryName=farmcategorycode.FarmCategoryName where farmpost.LocalName=? and farmpost.CategoryName=?', [body.local, body.category], (err, data) => {
+            console.log('data',data);
             if (err) console.log('query is not excuted. select fail...\n' + err);
             else res.render('search.ejs', {
               list: data,
               FarmYN: body.FarmYN,
               FarmCategoryName: data1,
               LocalName: data2,
-              is_logined: req.session.is_logined,
+              is_logined: false,
               name: null,
               FarmYN: null,
             });
@@ -465,6 +470,7 @@ app.post('/farmInfo', upload.single('fileupload'), (req, res) => {
                 is_logined: req.session.is_logined,
                 name: session[0].login_name,
                 FarmYN: session[0].login_farm_YN,
+                ID:session[0].login_number
               });
           });
         } else {
@@ -493,7 +499,8 @@ app.get('/programRegist', function (req, res, next) {
         is_logined: req.session.is_logined,
         name: session[0].login_name,
         FarmYN: session[0].login_farm_YN,
-        ID: session[0].login_number
+        ID: session[0].login_number,
+
       });
     });
   }
@@ -518,6 +525,7 @@ app.post('/programRegist', function (req, res) {
               is_logined: req.session.is_logined,
               name: session[0].login_name,
               FarmYN: session[0].login_farm_YN,
+              ID:session[0].login_number
             });
         });
       } else {
@@ -536,24 +544,46 @@ app.post('/programRegist', function (req, res) {
 
 app.post('/deletePrg', function (req, res) {
   var body = req.body;
-  console.log(body)
-  client.query('select * from login_session', (err, data) => {
     client.query('delete from program where PrgNum=?', [body.PrgNum]);
-    client.query('select * from farmpost inner join program on farmpost.PostNum=program.PostNum where ID=?', [data[0].login_number], (err, data1) => {
-      client.query('select * from farmpost where ID=?', [data[0].login_number], (err, data2) => {
-        if (body.button == "작성완료") {
-          res.redirect('/');
-        } else {
-          res.render('farmInfo.ejs', {
-            is_logined: req.session.is_logined,
-            FarmYN: data[0].FarmYN,
-            PostNum: body.PostNum,
-            list: data1,
-            list1: data2[0]
+  console.log(body)
+  if(body.FarmName != undefined) {
+    client.query('insert into farmpost(CategoryName,LocalName,ID,FarmName,FarmInfo,FarmAddress,PostDate,fileupload) values(?,?,?,?,?,?,CURDATE(),?)',
+          [body.category, body.local, body.ID, body.FarmName, body.FarmInfo, body.FarmAddress, req.file.originalname]);
+  }
+  client.query('select * from farmpost where ID=?', [body.ID], (err, data) => {
+    if (data.length != 0) {
+      console.log('data',data);
+      client.query('select * from program where PostNum=?', [data[0].PostNum], (err, data1) => {
+        for (var i = 0; i < data1.length; i++) {
+          data1[i].PrgStartDATE = data1[i].PrgStartDATE.toString().slice(0, 9)
+          data1[i].PrgEndDATE = data1[i].PrgEndDATE.toString().slice(0, 9)
+        }
+        if (req.session.is_logined == true) {
+          client.query('select * from login_session', (err, session) => {
+            res.render('farminfo.ejs',
+              {
+                farmpost: data,
+                program: data1,
+                is_logined: req.session.is_logined,
+                name: session[0].login_name,
+                FarmYN: session[0].login_farm_YN,
+                ID:session[0].login_number
+              });
           });
+        } else {
+          res.render('farminfo.ejs',
+            {
+              farmpost: data,
+              program: data1,
+              is_logined: req.session.is_logined,
+              name: null,
+              FarmYN: null,
+            });
         }
       });
-    });
+    } else {
+      res.send(`<script>alert('등록된 농장이 없습니다.');</script>`)
+    }
   });
 });
 
@@ -592,3 +622,4 @@ app.post('/delete', (req, res) => {
 app.listen(3000, () => {
   console.log('3000 port running...');
 });
+
